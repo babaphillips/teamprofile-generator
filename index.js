@@ -100,7 +100,7 @@ const addTeamMember = () => {
       name: "roles",
       message: "Do you want to add an engineer or intern to the team?",
       choices: [
-        "Manager",
+        "Engineer",
         "Intern",
         "Team is done",
       ],
@@ -177,8 +177,69 @@ const engineerQuestions = () => {
   ])
 }
 
+const internQuestions = () => {
+  return inquirer.prompt([
+    {
+      type: "input",
+      name: "name",
+      message: "What is the name of the team intern? (Required)",
+      validate: (nameInput) => {
+        if (nameInput) {
+          return true;
+        } else {
+          console.log("Please enter the name of the team intern!");
+          return false;
+        }
+      },
+    },
+    {
+      type: "input",
+      name: "id",
+      message: "Enter an employee ID for the intern",
+      validate: (idInput) => {
+        if (idInput) {
+          return true;
+        } else {
+          console.log("Please enter an employee ID for the intern!");
+          return false;
+        }
+      },
+    },
+    {
+      type: "input",
+      name: "email",
+      message: "Enter email address for intern!",
+      validate: function (email) {
+        valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+
+        if (valid) {
+          console.log("Great job");
+          return true;
+        } else {
+          console.log("Please enter a valid email");
+          return false;
+        }
+      },
+    },
+    {
+      type: "input",
+      name: "school",
+      message: "Enter the school the intern is currently enrolled!",
+      validate: (schoolInput) => {
+        if (schoolInput) {
+          return true;
+        } else {
+          console.log("Please enter the school the intern is currently enrolled");
+          return false;
+        }
+      },
+    },
+  ])
+}
+
 // Create a function to initialize app
-init(); //.then((readmeData) => {
+init();
+ //.then((readmeData) => {
 // Create a function to write README file
 //fs.writeFile("index.html", renderReadme(readmeData), (err) => {
 //if (err) throw new Error(err);
