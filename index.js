@@ -14,12 +14,7 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
 // empty array for employees
-const teamMembers = [];
-
-// function that start prompts
-function init() {
-  managerQuestions();
-}
+const employeesArray = [];
 
 const managerQuestions = () => {
   return inquirer.prompt([
@@ -78,46 +73,43 @@ const managerQuestions = () => {
         }
       },
     },
-  ])
+  ]);
   //.then((val) => {
-    //const manager = new Manager(
-      val.name,
-      val.id,
-      val.email,
-      val.officeNumber
-    //);
-    //console.table(manager);
-    //teamMembers.push(manager);
-    //});
-  }
-  //addTeamMember();
-
+  //const manager = new Manager(
+  val.name, val.id, val.email, val.officeNumber;
+  //);
+  //console.table(manager);
+  //teamMembers.push(manager);
+  //});
+};
 const addTeamMember = () => {
+  console.log(`
+    =================
+    Adding employees to the team
+    =================
+    `);
   inquirer
-  .prompt([
-    {
-      type: "list",
-      name: "roles",
-      message: "Do you want to add an engineer or intern to the team?",
-      choices: [
-        "Engineer",
-        "Intern",
-        "Team is done",
-      ],
-    },
-  ])
-  .then((val) => {
-    if (val.roles === "Engineer") {
-      engineerQuestions();
-    } else if (val.roles === "Intern") {
-      internQuestions();
-    } else {
-      generatePage();
-    }
+    .prompt([
+      {
+        type: "list",
+        name: "roles",
+        message: "Do you want to add an engineer or intern to the team?",
+        choices: ["Engineer", "Intern", "Team is done"],
+      },
+    ])
+    .then((val) => {
+      if (val.roles === "Engineer") {
+        engineerQuestions();
+      } else if (val.roles === "Intern") {
+        internQuestions();
+      } else {
+        generatePage();
+      }
     });
 };
+//addTeamMember();
 
-const engineerQuestions = () => {
+function engineerQuestions() {
   return inquirer.prompt([
     {
       type: "input",
@@ -174,10 +166,10 @@ const engineerQuestions = () => {
         }
       },
     },
-  ])
+  ]);
 }
 
-const internQuestions = () => {
+function internQuestions() {
   return inquirer.prompt([
     {
       type: "input",
@@ -224,28 +216,31 @@ const internQuestions = () => {
     {
       type: "input",
       name: "school",
-      message: "Enter the school the intern is currently enrolled!",
+      message:
+        "Enter the school the intern is currently enrolled or graduated!",
       validate: (schoolInput) => {
         if (schoolInput) {
           return true;
         } else {
-          console.log("Please enter the school the intern is currently enrolled");
+          console.log(
+            "Please enter the school the intern is currently enrolled or graduated"
+          );
           return false;
         }
       },
     },
-  ])
+  ]);
 }
 
 // Create a function to initialize app
-init();
- //.then((readmeData) => {
-// Create a function to write README file
-//fs.writeFile("index.html", renderReadme(readmeData), (err) => {
-//if (err) throw new Error(err);
-//else
-//console.log(
-//"Team HTML generated!"
-//);
-// });
-//});
+managerQuestions()
+  .then(addTeamMember)
+  .then((employeesArray) => {
+    return generatePage(employeesArray);
+  })
+  .then((pageHTML) => {
+    return fs.writeFile(pageHTML);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
