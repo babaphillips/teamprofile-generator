@@ -36,7 +36,7 @@ const managerQuestions = () => {
       {
         type: "input",
         name: "id",
-        message: "Enter an employee ID for the manager! (Required)",
+        message: "Enter an employee ID for the manager: (Required)",
         // validates answer is a number - NaN = Not-a-Number 
         validate: (idInput) => {
           if (idInput) {
@@ -50,12 +50,12 @@ const managerQuestions = () => {
       {
         type: "input",
         name: "email",
-        message: "Enter email address for team manager! (Required)",
+        message: "Enter email address for team manager: (Required)",
         // validates email address 
         validate: function (email) {
           valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
           if (valid) {
-            console.log("Nice!");
+            console.log("  Nice!");
             return true;
           } else {
             console.log("Please enter a valid email");
@@ -66,7 +66,7 @@ const managerQuestions = () => {
       {
         type: "input",
         name: "officeNumber",
-        message: "Enter office number for manager! (Required)",
+        message: "Enter office number for manager: (Required)",
         validate: (officeNumberInput) => {
           if (officeNumberInput) {
             return true;
@@ -77,15 +77,15 @@ const managerQuestions = () => {
         },
       },
     ])
-    .then((val) => {
+    .then((data) => {
       const manager = new Manager(
-        val.name,
-        val.id,
-        val.email,
-        val.officeNumber
+        data.name,
+        data.id,
+        data.email,
+        data.officeNumber
       );
-      // shows all captured data displayed in a table on terminal
-      console.table(manager);
+      // shows all captured data displayed
+      console.log(manager);
       // The push method adds new items to the end of an array. Adding manager to employeesArray
       employeesArray.push(manager);
       // run addTeamMember function
@@ -95,9 +95,9 @@ const managerQuestions = () => {
 
 const addTeamMember = () => {
   console.log(`
-    =================
-    Add employees to the team
-    =================
+    ===========================
+     Add employees to the team
+    ===========================
     `);
   inquirer
     .prompt([
@@ -108,12 +108,12 @@ const addTeamMember = () => {
         choices: ["Engineer", "Intern", "Team is done"],
       },
     ])
-    .then((val) => {
+    .then((data) => {
       // if Engineer is selected, engineerQuestions function will run
-      if (val.roles === "Engineer") {
+      if (data.roles === "Engineer") {
         engineerQuestions();
       // if Intern is selected, internQuestions function will run
-      } else if (val.roles === "Intern") {
+      } else if (data.roles === "Intern") {
         internQuestions();
       // if Team is done is selected, the page will be generated  
       } else {
@@ -142,7 +142,7 @@ const engineerQuestions = () => {
       {
         type: "input",
         name: "id",
-        message: "Enter an employee ID for the engineer! (Required)",
+        message: "Enter an employee ID for the engineer: (Required)",
           // validates answer is a number - NaN = Not-a-Number 
           validate: (idInput) => {
             if (idInput) {
@@ -156,7 +156,7 @@ const engineerQuestions = () => {
       {
         type: "input",
         name: "email",
-        message: "Enter email address for engineer! (Required)",
+        message: "Enter email address for engineer: (Required)",
         // validates email address 
         validate: function (email) {
           valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
@@ -172,7 +172,7 @@ const engineerQuestions = () => {
       {
         type: "input",
         name: "github",
-        message: "Enter GitHub username for the team engineer! (Required)",
+        message: "Enter GitHub username for the team engineer: (Required)",
         validate: (officeNumberInput) => {
           if (officeNumberInput) {
             return true;
@@ -183,9 +183,9 @@ const engineerQuestions = () => {
         },
       },
     ])
-    .then((val) => {
-      const engineer = new Engineer(val.name, val.id, val.email, val.github);
-      console.table(engineer);
+    .then((data) => {
+      const engineer = new Engineer(data.name, data.id, data.email, data.github);
+      console.log(engineer);
       employeesArray.push(engineer);
       addTeamMember();
     });
@@ -210,7 +210,7 @@ function internQuestions() {
       {
         type: "input",
         name: "id",
-        message: "Enter an employee ID for the intern! (Required)",
+        message: "Enter an employee ID for the intern: (Required)",
         // validates there is an answer
           validate: (idInput) => {
             if (idInput) {
@@ -224,7 +224,7 @@ function internQuestions() {
       {
         type: "input",
         name: "email",
-        message: "Enter email address for intern! (Required)",
+        message: "Enter email address for intern: (Required)",
         // validates email address 
         validate: function (email) {
           valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
@@ -241,7 +241,7 @@ function internQuestions() {
         type: "input",
         name: "school",
         message:
-          "Enter the school the intern is currently enrolled or graduated! (Required)",
+          "Enter the school the intern is currently enrolled or graduated: (Required)",
         validate: (schoolInput) => {
           if (schoolInput) {
             return true;
@@ -254,9 +254,9 @@ function internQuestions() {
         },
       },
     ])
-    .then((val) => {
-      const intern = new Intern(val.name, val.id, val.email, val.school);
-      console.table(intern);
+    .then((data) => {
+      const intern = new Intern(data.name, data.id, data.email, data.school);
+      console.log(intern);
       employeesArray.push(intern);
       addTeamMember();
     });
