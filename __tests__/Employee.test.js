@@ -39,10 +39,12 @@ test('can get id via getId() function', () => {
 test('can get email via getEmail() function', () => {
     const testEmail = "amandavphillips@icloud.com";
     const employee = new Employee("Amanda", 12, testEmail);
+    expect(employee.getEmail()).toBe(testEmail);
 });
 
 test('can get role via getRole() function', () => {
     const testRole = "Employee";
     const employee = new Employee("Jade", 17, "amandavphillips@icloud.com")
+    expect(employee.getRole()).toBe(testRole);
 });
 
