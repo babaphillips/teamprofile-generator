@@ -37,7 +37,7 @@ const managerQuestions = () => {
         type: "input",
         name: "id",
         message: "Enter an employee ID for the manager: (Required)",
-        // validates answer is a number - NaN = Not-a-Number 
+        // validates answer is a number - NaN = Not-a-Number
         validate: (idInput) => {
           if (idInput) {
             return true;
@@ -46,12 +46,12 @@ const managerQuestions = () => {
             return false;
           }
         },
-        },
+      },
       {
         type: "input",
         name: "email",
         message: "Enter email address for team manager: (Required)",
-        // validates email address 
+        // validates email address
         validate: function (email) {
           valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
           if (valid) {
@@ -112,10 +112,10 @@ const addTeamMember = () => {
       // if Engineer is selected, engineerQuestions function will run
       if (data.roles === "Engineer") {
         engineerQuestions();
-      // if Intern is selected, internQuestions function will run
+        // if Intern is selected, internQuestions function will run
       } else if (data.roles === "Intern") {
         internQuestions();
-      // if Team is done is selected, the page will be generated  
+        // if Team is done is selected, the page will be generated
       } else {
         generatePage();
       }
@@ -143,21 +143,21 @@ const engineerQuestions = () => {
         type: "input",
         name: "id",
         message: "Enter an employee ID for the engineer: (Required)",
-          // validates answer is a number - NaN = Not-a-Number 
-          validate: (idInput) => {
-            if (idInput) {
-              return true;
-            } else {
-              console.log("Please enter an employee ID for the engineer!");
-              return false;
-            }
-          },
+        // validates answer is a number - NaN = Not-a-Number
+        validate: (idInput) => {
+          if (idInput) {
+            return true;
+          } else {
+            console.log("Please enter an employee ID for the engineer!");
+            return false;
+          }
+        },
       },
       {
         type: "input",
         name: "email",
         message: "Enter email address for engineer: (Required)",
-        // validates email address 
+        // validates email address
         validate: function (email) {
           valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
           if (valid) {
@@ -184,7 +184,12 @@ const engineerQuestions = () => {
       },
     ])
     .then((data) => {
-      const engineer = new Engineer(data.name, data.id, data.email, data.github);
+      const engineer = new Engineer(
+        data.name,
+        data.id,
+        data.email,
+        data.github
+      );
       console.log(engineer);
       employeesArray.push(engineer);
       addTeamMember();
@@ -212,20 +217,20 @@ function internQuestions() {
         name: "id",
         message: "Enter an employee ID for the intern: (Required)",
         // validates there is an answer
-          validate: (idInput) => {
-            if (idInput) {
-              return true;
-            } else {
-              console.log("Please enter an employee ID for the intern!");
-              return false;
-            }
-          },
+        validate: (idInput) => {
+          if (idInput) {
+            return true;
+          } else {
+            console.log("Please enter an employee ID for the intern!");
+            return false;
+          }
+        },
       },
       {
         type: "input",
         name: "email",
         message: "Enter email address for intern: (Required)",
-        // validates email address 
+        // validates email address
         validate: function (email) {
           valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
           if (valid) {
