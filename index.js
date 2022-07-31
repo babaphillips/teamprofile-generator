@@ -16,6 +16,7 @@ const Intern = require("./lib/Intern");
 // empty array for employees
 const employeesArray = [];
 
+// starting with Manager questions as stated in acceptance criteria
 const managerQuestions = () => {
   return inquirer
     .prompt([
@@ -35,24 +36,26 @@ const managerQuestions = () => {
       {
         type: "input",
         name: "id",
-        message: "Enter an employee ID for the manager",
+        message: "Enter an employee ID for the manager! (Required)",
         // validates answer is a number - NaN = Not-a-Number 
         validate: (idInput) => {
-          if (isNaN(idInput)) {
-            return "Please enter a number for the employee ID";
+          if (idInput) {
+            return true;
+          } else {
+            console.log("Please enter an employee ID for the manager!");
+            return false;
           }
-          return true;
-          },
+        },
         },
       {
         type: "input",
         name: "email",
-        message: "Enter email address for team manager!",
+        message: "Enter email address for team manager! (Required)",
         // validates email address 
         validate: function (email) {
           valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
           if (valid) {
-            console.log("Great job");
+            console.log("Nice!");
             return true;
           } else {
             console.log("Please enter a valid email");
@@ -63,13 +66,15 @@ const managerQuestions = () => {
       {
         type: "input",
         name: "officeNumber",
-        message: "Enter office number for manager!",
+        message: "Enter office number for manager! (Required)",
         validate: (officeNumberInput) => {
-          if (isNaN(officeNumberInput)) {
-            return "Please enter a office number for the manager!";
+          if (officeNumberInput) {
+            return true;
+          } else {
+            console.log("Please enter an office number for the manager!");
+            return false;
           }
-          return true;
-          },
+        },
       },
     ])
     .then((val) => {
@@ -79,8 +84,11 @@ const managerQuestions = () => {
         val.email,
         val.officeNumber
       );
+      // shows all captured data displayed in a table on terminal
       console.table(manager);
+      // The push method adds new items to the end of an array. Adding manager to employeesArray
       employeesArray.push(manager);
+      // run addTeamMember function
       addTeamMember();
     });
 };
@@ -101,17 +109,20 @@ const addTeamMember = () => {
       },
     ])
     .then((val) => {
+      // if Engineer is selected, engineerQuestions function will run
       if (val.roles === "Engineer") {
         engineerQuestions();
+      // if Intern is selected, internQuestions function will run
       } else if (val.roles === "Intern") {
         internQuestions();
+      // if Team is done is selected, the page will be generated  
       } else {
         generatePage();
       }
     });
 };
-//addTeamMember();
 
+// Engineer questions function
 const engineerQuestions = () => {
   return inquirer
     .prompt([
@@ -131,19 +142,21 @@ const engineerQuestions = () => {
       {
         type: "input",
         name: "id",
-        message: "Enter an employee ID for the engineer",
+        message: "Enter an employee ID for the engineer! (Required)",
           // validates answer is a number - NaN = Not-a-Number 
           validate: (idInput) => {
-            if (isNaN(idInput)) {
-              return "Please enter a number for the employee ID";
+            if (idInput) {
+              return true;
+            } else {
+              console.log("Please enter an employee ID for the engineer!");
+              return false;
             }
-            return true;
-            },
+          },
       },
       {
         type: "input",
         name: "email",
-        message: "Enter email address for engineer!",
+        message: "Enter email address for engineer! (Required)",
         // validates email address 
         validate: function (email) {
           valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
@@ -159,7 +172,7 @@ const engineerQuestions = () => {
       {
         type: "input",
         name: "github",
-        message: "Enter GitHub username for the team engineer!",
+        message: "Enter GitHub username for the team engineer! (Required)",
         validate: (officeNumberInput) => {
           if (officeNumberInput) {
             return true;
@@ -197,19 +210,21 @@ function internQuestions() {
       {
         type: "input",
         name: "id",
-        message: "Enter an employee ID for the intern",
-        // validates answer is a number - NaN = Not-a-Number 
-        validate: (idInput) => {
-          if (isNaN(idInput)) {
-            return "Please enter a number for the employee ID";
-          }
-          return true;
+        message: "Enter an employee ID for the intern! (Required)",
+        // validates there is an answer
+          validate: (idInput) => {
+            if (idInput) {
+              return true;
+            } else {
+              console.log("Please enter an employee ID for the intern!");
+              return false;
+            }
           },
       },
       {
         type: "input",
         name: "email",
-        message: "Enter email address for intern!",
+        message: "Enter email address for intern! (Required)",
         // validates email address 
         validate: function (email) {
           valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
@@ -226,7 +241,7 @@ function internQuestions() {
         type: "input",
         name: "school",
         message:
-          "Enter the school the intern is currently enrolled or graduated!",
+          "Enter the school the intern is currently enrolled or graduated! (Required)",
         validate: (schoolInput) => {
           if (schoolInput) {
             return true;
