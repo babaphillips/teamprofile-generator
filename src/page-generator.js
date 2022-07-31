@@ -42,7 +42,7 @@ const generatePage = (team) => {
     <div class="card employee-card" style="width: 15rem;">
                 <div class="card-header p-3 mb-2 bg-primary text-white text-center">
                   <h2 class="card-title">${intern.getName()}</h2>
-                  <h3 class="card-title"><i class="bi bi-eyeglasses"></i>${intern.getRole()}</h3>
+                  <h3 class="card-title"><i class="bi bi-mortarboard-fill"></i>${intern.getRole()}</h3>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
@@ -54,7 +54,7 @@ const generatePage = (team) => {
     </div>
     `;
   };
-  
+
 };
 
 // export function to generate entire page

@@ -12,6 +12,7 @@ const generatePage = require("./src/page-generator");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+const pageGenerator = require("./src/page-generator");
 
 // empty array for employees
 const employeesArray = [];
@@ -269,12 +270,13 @@ function internQuestions() {
 
 // Create a function to initialize app
 managerQuestions()
-  .then((employeesArray) => {
-    return generatePage(employeesArray);
-  })
-  .then((pageHTML) => {
-    return fs.writeFile(pageHTML);
-  })
-  .catch((err) => {
-    console.log(err);
+  .then((employeesData) => {
+   // Create a function to write html file
+  fs.writeFile("./dist/index.html", pageGenerator(employeesData), (err) => {
+    if (err) throw new Error(err);
+    else
+      console.log(
+        "index.html created!"
+      );
   });
+});
