@@ -34,3 +34,16 @@
     </main>
 </body>
 </html>
+
+// Create a function to initialize app
+managerQuestions()
+  .then((employeesData) => {
+   // Create a function to write html file
+  fs.writeFile("./dist/index.html", pageGenerator(employeesData), (err) => {
+    if (err) throw new Error(err);
+    else
+      console.log(
+        "index.html created!"
+      );
+  });
+});

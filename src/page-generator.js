@@ -1,6 +1,6 @@
-const generatePage = (team) => {
+function generatePage(employeesData) {
   //creates manager html
-  const generateManager = (manager) => {
+  function generateManager(manager) {
     return `
     <div class="card employee-card" style="width: 15rem;">
                 <div class="card-header p-3 mb-2 bg-primary text-white text-center">
@@ -16,9 +16,9 @@ const generatePage = (team) => {
                 </div>
                 </div>
     `;
-  };
+  }
   // create engineer html
-  const generateEngineer = (engineer) => {
+  function generateEngineer(engineer) {
     return `
     <div class="card employee-card" style="width: 15rem;">
                 <div class="card-header p-3 mb-2 bg-primary text-white text-center">
@@ -34,10 +34,10 @@ const generatePage = (team) => {
                 </div>
     </div>
     `;
-  };
+  }
 
   // create intern html
-  const generateIntern = (intern) => {
+  function generateIntern(intern) {
     return `
     <div class="card employee-card" style="width: 15rem;">
                 <div class="card-header p-3 mb-2 bg-primary text-white text-center">
@@ -53,13 +53,34 @@ const generatePage = (team) => {
                 </div>
     </div>
     `;
+  }
+
+  const generatePage = (employees) => {
+    const html = [];
+
+    html.push(
+      employees
+        .filter((employee) => employee.getRole() === "Manager")
+        .map((manager) => generateManager(manager))
+    );
+    html.push(
+      employees
+        .filter((employee) => employee.getRole() === "Engineer")
+        .map((engineer) => generateEngineer(engineer))
+    );
+    html.push(
+      employees
+        .filter((employee) => employee.getRole() === "Intern")
+        .map((intern) => generateIntern(intern))
+    );
+
+    return renderMain(html.join(""));
+
   };
-
-};
-
-// export function to generate entire page
-module.exports = (team) => {
-  return `
+}
+  // export function to generate entire page
+  module.exports = (team) => {
+    return `
     <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,4 +106,4 @@ module.exports = (team) => {
 </body>
 </html>
     `;
-};
+  };

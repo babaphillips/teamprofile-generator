@@ -8,7 +8,7 @@ const fs = require("fs");
 // This function is contained in the page-generator file
 const generatePage = require("./src/page-generator");
 
-// require the employees information
+// require the employee classes
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
@@ -16,6 +16,7 @@ const pageGenerator = require("./src/page-generator");
 
 // empty array for employees
 const employeesArray = [];
+
 
 // starting with Manager questions as stated in acceptance criteria
 const managerQuestions = () => {
@@ -59,7 +60,7 @@ const managerQuestions = () => {
             console.log("  Nice!");
             return true;
           } else {
-            console.log("Please enter a valid email");
+            console.log("  Please enter a valid email");
             return false;
           }
         },
@@ -92,8 +93,9 @@ const managerQuestions = () => {
       // run addTeamMember function
       addTeamMember();
     });
-};
+}
 
+// Add team member function
 const addTeamMember = () => {
   console.log(`
     ===========================
@@ -118,10 +120,10 @@ const addTeamMember = () => {
         internQuestions();
         // if Team is done is selected, the page will be generated
       } else {
-        generatePage();
+        generateTeam();
       }
     });
-};
+}
 
 // Engineer questions function
 const engineerQuestions = () => {
@@ -165,7 +167,7 @@ const engineerQuestions = () => {
             console.log("Great job");
             return true;
           } else {
-            console.log("Please enter a valid email");
+            console.log("  Please enter a valid email");
             return false;
           }
         },
@@ -195,9 +197,10 @@ const engineerQuestions = () => {
       employeesArray.push(engineer);
       addTeamMember();
     });
-};
+}
 
-function internQuestions() {
+// Intern questions function
+const internQuestions = () => {
   return inquirer
     .prompt([
       {
@@ -266,17 +269,28 @@ function internQuestions() {
       employeesArray.push(intern);
       addTeamMember();
     });
-}
+  }
 
-// Create a function to initialize app
-managerQuestions()
-  .then((employeesData) => {
-   // Create a function to write html file
-  fs.writeFile("./dist/index.html", pageGenerator(employeesData), (err) => {
+  //function createFile() {
+    //fs.writeFile("./dist/index.html", generatePage(employeesArray), "UTF-8");
+    //console.log("File created in the dist folder");
+ // }
+//}
+
+
+
+
+function generateTeam()  {
+  // Create a function to write html file
+  fs.writeFile("./dist/index.html", generatePage(employeesArray), (err) => {
     if (err) throw new Error(err);
     else
-      console.log(
-        "index.html created!"
+    console.log(
+      "index.html created!"
       );
-  });
-});
+    })
+  }
+  
+  // Create a function to initialize app
+  managerQuestions() 
+
