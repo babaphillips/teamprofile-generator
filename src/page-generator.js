@@ -1,6 +1,7 @@
-function generatePage(employeesData) {
-  //creates manager html
-  function generateManager(manager) {
+
+const generatePage = employeesData => {
+  //creates manager html container // parameter can be any name
+  const generateManager = manager => {
     return `
     <div class="card employee-card" style="width: 15rem;">
                 <div class="card-header p-3 mb-2 bg-primary text-white text-center">
@@ -11,19 +12,19 @@ function generatePage(employeesData) {
                     <ul class="list-group">
                       <li class="list-group-item">ID: ${manager.getId()} </li>
                       <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}"></a></li>
-                      <li class="list-group-item">Office Number: ${manager.getOfficeNumber()}</li>
+                      <li class="list-group-item">Office Number: ${manager.getOfficenumber()}</li>
                     </ul>
                 </div>
                 </div>
     `;
-  }
-  // create engineer html
-  function generateEngineer(engineer) {
+  };
+  // create engineer html // parameter can be any name
+  const generateEngineer = engineer => {
     return `
     <div class="card employee-card" style="width: 15rem;">
                 <div class="card-header p-3 mb-2 bg-primary text-white text-center">
                   <h2 class="card-title">${engineer.getName()}</h2>
-                  <h3 class="card-title"><i class="bi bi-eyeglasses"></i>${manager.getRole()}</h3>
+                  <h3 class="card-title"><i class="bi bi-eyeglasses"></i>${engineer.getRole()}</h3>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
@@ -34,10 +35,10 @@ function generatePage(employeesData) {
                 </div>
     </div>
     `;
-  }
+  };
 
-  // create intern html
-  function generateIntern(intern) {
+  // create intern html // parameter can be any name
+  const generateIntern = intern => {
     return `
     <div class="card employee-card" style="width: 15rem;">
                 <div class="card-header p-3 mb-2 bg-primary text-white text-center">
@@ -53,33 +54,35 @@ function generatePage(employeesData) {
                 </div>
     </div>
     `;
-  }
-
-  const generatePage = (employees) => {
-    const html = [];
-
-    html.push(
-      employees
-        .filter((employee) => employee.getRole() === "Manager")
-        .map((manager) => generateManager(manager))
-    );
-    html.push(
-      employees
-        .filter((employee) => employee.getRole() === "Engineer")
-        .map((engineer) => generateEngineer(engineer))
-    );
-    html.push(
-      employees
-        .filter((employee) => employee.getRole() === "Intern")
-        .map((intern) => generateIntern(intern))
-    );
-
-    return renderMain(html.join(""));
-
   };
+
+  const pageProfiles = [];
+
+  //The push() method adds new items to the end of an array. The push() method changes the length of the array.
+  pageProfiles.push(employeesData
+    // filter creates a new array by removing elements that don't belong. The filter() method does not change the original array.
+    .filter(employee => employee.getRole() === "Manager")
+    //map creates a new array by transforming every element in an array individually. 
+);
+pageProfiles.push(employeesData
+    .filter(employee => employee.getRole() === "Engineer")
+    .map(engineer => generateEngineer(engineer))
+    .join("")
+);
+pageProfiles.push(employeesData
+    .filter(employee => employee.getRole() === "Intern")
+    .map(intern => generateIntern(intern))
+    .join("")
+);
+
+// join() method joins all the elements of an array into a string.
+return pageProfiles.join("");
+
+  
+
 }
-  // export function to generate entire page
-  module.exports = (team) => {
+  // export function to generate entire page // parameter can be any name
+  module.exports = team => {
     return `
     <!DOCTYPE html>
 <html lang="en">

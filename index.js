@@ -12,9 +12,9 @@ const generatePage = require("./src/page-generator");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-const pageGenerator = require("./src/page-generator");
 
-// empty array for employees
+
+// empty array for employees to be added on
 const employeesArray = [];
 
 
@@ -38,14 +38,14 @@ const managerQuestions = () => {
       {
         type: "input",
         name: "id",
-        message: "Enter an employee ID for the manager: (Required)",
+        message: "Enter an employee ID for the manager: (Only numbers accepted)",
         // validates answer is a number - NaN = Not-a-Number
         validate: (idInput) => {
-          if (idInput) {
-            return true;
-          } else {
-            console.log("Please enter an employee ID for the manager!");
+          if (isNaN(idInput)) {
+            console.log("  Please enter a number for your employee ID for the manager!");
             return false;
+          } else {
+            return true;
           }
         },
       },
@@ -79,7 +79,9 @@ const managerQuestions = () => {
         },
       },
     ])
+    //The then() method returns a Promise. It takes two arguments: callback functions for the success and failure cases of the Promise.
     .then((data) => {
+//is used to create an instance of an object that has a constructor function.
       const manager = new Manager(
         data.name,
         data.id,
@@ -145,14 +147,14 @@ const engineerQuestions = () => {
       {
         type: "input",
         name: "id",
-        message: "Enter an employee ID for the engineer: (Required)",
+        message: "Enter an employee ID for the engineer: (Only numbers accepted)",
         // validates answer is a number - NaN = Not-a-Number
         validate: (idInput) => {
-          if (idInput) {
-            return true;
-          } else {
-            console.log("Please enter an employee ID for the engineer!");
+          if (isNaN(idInput)) {
+            console.log("  Please enter a number for your employee ID for the engineer!");
             return false;
+          } else {
+            return true;
           }
         },
       },
@@ -219,14 +221,14 @@ const internQuestions = () => {
       {
         type: "input",
         name: "id",
-        message: "Enter an employee ID for the intern: (Required)",
+        message: "Enter an employee ID for the intern: (Only numbers)",
         // validates there is an answer
         validate: (idInput) => {
-          if (idInput) {
-            return true;
-          } else {
-            console.log("Please enter an employee ID for the intern!");
+          if (isNaN(idInput)) {
+            console.log("  Please enter a number for your employee ID for the intern!");
             return false;
+          } else {
+            return true;
           }
         },
       },
@@ -271,22 +273,14 @@ const internQuestions = () => {
     });
   }
 
-  //function createFile() {
-    //fs.writeFile("./dist/index.html", generatePage(employeesArray), "UTF-8");
-    //console.log("File created in the dist folder");
- // }
-//}
 
-
-
-
+// creates a function that generates my HTML
 function generateTeam()  {
-  // Create a function to write html file
   fs.writeFile("./dist/index.html", generatePage(employeesArray), (err) => {
     if (err) throw new Error(err);
     else
     console.log(
-      "index.html created!"
+      "Team profile page created in dist folder!"
       );
     })
   }
