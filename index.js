@@ -90,8 +90,6 @@ const managerQuestions = () => {
           data.email,
           data.officeNumber
         );
-        // shows all captured data displayed
-        console.log(manager);
         // The push method adds new items to the end of an array. Adding manager to employeesArray
         employeesArray.push(manager);
         // run addTeamMember function
@@ -203,7 +201,6 @@ const engineerQuestions = () => {
         data.email,
         data.github
       );
-      console.log(engineer);
       employeesArray.push(engineer);
       addTeamMember();
     });
@@ -277,7 +274,6 @@ const internQuestions = () => {
     ])
     .then((data) => {
       const intern = new Intern(data.name, data.id, data.email, data.school);
-      console.log(intern);
       employeesArray.push(intern);
       addTeamMember();
     });
