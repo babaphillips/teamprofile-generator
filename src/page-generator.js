@@ -1,7 +1,6 @@
-
-const generatePage = employeesData => {
+const generatePage = (employeesData) => {
   //creates manager html container // parameter can be any name
-  const generateManager = manager => {
+  const generateManager = (manager) => {
     return `
     <div class="card employee-card" style="width: 15rem;">
                 <div class="card-header p-3 mb-2 bg-primary text-white text-center">
@@ -11,7 +10,7 @@ const generatePage = employeesData => {
                 <div class="card-body">
                     <ul class="list-group">
                       <li class="list-group-item">ID: ${manager.getId()} </li>
-                      <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}"></a></li>
+                      <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></li>
                       <li class="list-group-item">Office Number: ${manager.getOfficenumber()}</li>
                     </ul>
                 </div>
@@ -19,7 +18,7 @@ const generatePage = employeesData => {
     `;
   };
   // create engineer html // parameter can be any name
-  const generateEngineer = engineer => {
+  const generateEngineer = (engineer) => {
     return `
     <div class="card employee-card" style="width: 15rem;">
                 <div class="card-header p-3 mb-2 bg-primary text-white text-center">
@@ -29,8 +28,8 @@ const generatePage = employeesData => {
                 <div class="card-body">
                     <ul class="list-group">
                       <li class="list-group-item">ID: ${engineer.getId()} </li>
-                      <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}"></a></li>
-                      <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.getGithub()}"</li>
+                      <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
+                      <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.getGithub()}">${engineer.getGithub()}</a></li>
                     </ul>
                 </div>
     </div>
@@ -38,7 +37,7 @@ const generatePage = employeesData => {
   };
 
   // create intern html // parameter can be any name
-  const generateIntern = intern => {
+  const generateIntern = (intern) => {
     return `
     <div class="card employee-card" style="width: 15rem;">
                 <div class="card-header p-3 mb-2 bg-primary text-white text-center">
@@ -48,7 +47,7 @@ const generatePage = employeesData => {
                 <div class="card-body">
                     <ul class="list-group">
                       <li class="list-group-item">ID: ${intern.getId()} </li>
-                      <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}"></a></li>
+                      <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></li>
                       <li class="list-group-item">School: ${intern.getSchool()}</li>
                     </ul>
                 </div>
@@ -59,31 +58,30 @@ const generatePage = employeesData => {
   const pageProfiles = [];
 
   //The push() method adds new items to the end of an array. The push() method changes the length of the array.
-  pageProfiles.push(employeesData
-    // filter creates a new array by removing elements that don't belong. The filter() method does not change the original array.
-    .filter(employee => employee.getRole() === "Manager")
-    //map creates a new array by transforming every element in an array individually. 
-);
-pageProfiles.push(employeesData
-    .filter(employee => employee.getRole() === "Engineer")
-    .map(engineer => generateEngineer(engineer))
-    .join("")
-);
-pageProfiles.push(employeesData
-    .filter(employee => employee.getRole() === "Intern")
-    .map(intern => generateIntern(intern))
-    .join("")
-);
+  pageProfiles.push(
+    employeesData
+      // filter creates a new array by removing elements that don't belong. The filter() method does not change the original array.
+      .filter((employee) => employee.getRole() === "Manager")
+      .map((manager) => generateManager(manager))
+    //map creates a new array by transforming every element in an array individually.
+  );
+  pageProfiles.push(
+    employeesData
+      .filter((employee) => employee.getRole() === "Engineer")
+      .map((engineer) => generateEngineer(engineer))
+  );
+  pageProfiles.push(
+    employeesData
+      .filter((employee) => employee.getRole() === "Intern")
+      .map((intern) => generateIntern(intern))
+  );
 
-// join() method joins all the elements of an array into a string.
-return pageProfiles.join("");
-
-  
-
-}
-  // export function to generate entire page // parameter can be any name
-  module.exports = team => {
-    return `
+  // join() method joins all the elements of an array into a string.
+  return pageProfiles.join("");
+};
+// export function to generate entire page // parameter can be any name
+module.exports = (team) => {
+  return `
     <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -102,11 +100,11 @@ return pageProfiles.join("");
             </div>
     </header>
         <main>
-        <div class="container">
+        <div class="container row">
         ${generatePage(team)}
         </div>
     </main>
 </body>
 </html>
     `;
-  };
+};
