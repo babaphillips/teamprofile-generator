@@ -5,7 +5,7 @@ const generatePage = (employeesData) => {
     <div class="card employee-card" style="width: 15rem;">
                 <div class="card-header p-3 mb-2 bg-primary text-white text-center">
                   <h2 class="card-title">${manager.getName()}</h2>
-                  <h3 class="card-title"><i class="bi bi-cup-hot-fill"></i>${manager.getRole()}</h3>
+                  <h3 class="card-title"><i class="fa-solid fa-mug-hot"></i>${manager.getRole()}</h3>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
@@ -23,7 +23,7 @@ const generatePage = (employeesData) => {
     <div class="card employee-card" style="width: 15rem;">
                 <div class="card-header p-3 mb-2 bg-primary text-white text-center">
                   <h2 class="card-title">${engineer.getName()}</h2>
-                  <h3 class="card-title"><i class="bi bi-eyeglasses"></i>${engineer.getRole()}</h3>
+                  <h3 class="card-title"><i class="fa-solid fa-glasses"></i>${engineer.getRole()}</h3>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
@@ -42,7 +42,7 @@ const generatePage = (employeesData) => {
     <div class="card employee-card" style="width: 15rem;">
                 <div class="card-header p-3 mb-2 bg-primary text-white text-center">
                   <h2 class="card-title">${intern.getName()}</h2>
-                  <h3 class="card-title"><i class="bi bi-mortarboard-fill"></i>${intern.getRole()}</h3>
+                  <h3 class="card-title"><i class="fa-solid fa-graduation-cap"></i>${intern.getRole()}</h3>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
@@ -89,6 +89,7 @@ module.exports = (team) => {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/4383c4a7c8.js" crossorigin="anonymous"></script>
     <title>My Team</title>
 </head>
 <body>
