@@ -55,9 +55,14 @@ const generatePage = (employeesData) => {
     `;
   };
 
+  // empty array called const pageProfiles where we will push all data into it
   const pageProfiles = [];
 
-  //The push() method adds new items to the end of an array. The push() method changes the length of the array.
+  // example of how to push the data into the HTML in module 9 over portofolio generator project
+  // The push() method adds new items to the end of an array. The push() method changes the length of the array
+  // The push method is pushing the employeesData into the pageProfiles empty array. Filter will
+  // remove all the elements that don't belong such as Engineer or Intern. Map will create a new array with all the information gathered.
+  // Same process for Engineer and Intern then return pageProfiles with join method which will add all elements (Manager/Engineer/Intern) into the array
   pageProfiles.push(
     employeesData
       // filter creates a new array by removing elements that don't belong. The filter() method does not change the original array.
@@ -79,6 +84,7 @@ const generatePage = (employeesData) => {
   // join() method joins all the elements of an array into a string.
   return pageProfiles.join("");
 };
+
 // export function to generate entire page // parameter can be any name
 module.exports = (team) => {
   return `

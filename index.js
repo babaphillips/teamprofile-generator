@@ -115,15 +115,16 @@ const addTeamMember = () => {
       },
     ])
     .then((selected) => {
-      // if Engineer is selected, engineerQuestions function will run
-
       switch (selected.roles) {
+        // if Engineer is selected, engineerQuestions function will run
         case "Engineer":
           engineerQuestions();
           break;
+        // if Intern is selected, internQuestions function will run
         case "Intern":
           internQuestions();
           break;
+        // if none of the two answer are selected, generateTeam function will run
         default:
           generateTeam();
       }
@@ -172,7 +173,7 @@ const engineerQuestions = () => {
         validate: function (email) {
           valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
           if (valid) {
-            console.log("Great job");
+            console.log("   Great job");
             return true;
           } else {
             console.log("  Please enter a valid email");
@@ -281,6 +282,7 @@ const internQuestions = () => {
 
 // creates a function that generates my HTML
 function generateTeam() {
+  // creates my index.html file in the dist folder
   fs.writeFile("./dist/index.html", generatePage(employeesArray), (err) => {
     if (err) throw new Error(err);
     else console.log("Team profile page created in dist folder!");
